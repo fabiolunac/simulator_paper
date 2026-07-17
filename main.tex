@@ -1,11 +1,12 @@
 % =====================================================================
 % Real-Time FPGA-Based Pulse Simulator for Calorimeter Readout
 % Esqueleto de artigo de periódico — classe IEEEtran.
-% RESTRIÇÕES: (1) citações: QUALQUER tipo de fonte (periódico, conferência,
-%                 preprint, datasheet/módulo comercial — ex.: CAEN), desde que
-%                 o mais RECENTE possível e em INGLÊS;
-%             (2) NENHUMA menção a ATLAS/TileCal/LHC — enquadrar como
-%                 "nuclear instrumentation" genérica.
+% REGRAS (revisão do Luciano, 2026-07-17):
+%   (1) citações: QUALQUER tipo de fonte (periódico, conferência,
+%       preprint, datasheet/módulo comercial — ex.: CAEN), desde que
+%       o mais RECENTE possível e em INGLÊS;
+%   (2) NENHUMA menção a ATLAS/TileCal/LHC — enquadrar como
+%       "nuclear instrumentation" genérica.
 % Compilar: pdflatex -> bibtex -> pdflatex x2
 % =====================================================================
 \documentclass[journal]{IEEEtran}
@@ -14,6 +15,7 @@
 \usepackage{amsmath}
 \usepackage{cite}
 \usepackage{xcolor}
+\usepackage{url}
 
 % Notas TODO visíveis no PDF — remover antes da submissão
 \newcommand{\todo}[1]{\textcolor{red!70!black}{\textit{#1}}}
@@ -50,21 +52,40 @@ FPGA, real-time simulation, pulse simulator, nuclear instrumentation, calorimetr
 
 \todo{Vantagem do FPGA vs.\ simulação offline: latência, paralelismo, hardware-in-the-loop.}
 
-\todo{Trabalhos relacionados \cite{quirino2025,paschoalin2026,jordanov1994,regadio2014} — qualquer tipo de fonte, o mais recente possível, em inglês.}
+\todo{Breve menção aos trabalhos do grupo \cite{quirino2025,paschoalin2026} e apontar para a seção de estado da arte (Section II).}
 
 \todo{Contribuição: simulador completo em três estágios — RNG, atribuição de energia das colisões, shaper — gerando pulsos a 40 MHz, compatível com a taxa de eventos de experimentos de colisão modernos. Organização do texto.}
 
 % =====================================================================
+\section{Real-Time Pulse Generation: State of the Art}
+% Nova seção pedida na revisão: responder (i) o que existe de
+% simuladores/geradores de pulso em tempo real para física nuclear,
+% (ii) com que arquitetura cada um trabalha, (iii) em que nosso método
+% difere.
+
+\todo{Síntese digital de formas de pulso como origem da linha \cite{jordanov1994,regadio2014}.}
+
+\todo{Geradores em FPGA evento a evento: multicanal Poisson \cite{arkani2013}, amplitude com distribuição prescrita \cite{ponikvar2018}, formas exponenciais/gaussianas configuráveis \cite{garciaduran2019}, emulador Poisson por ensaios de Bernoulli \cite{ieee_neutron_emulator}.}
+
+\todo{Rota ``detector virtual''/software: emulador com pile-up \cite{pechousek2016}, Monte Carlo \cite{lisangang2021,ma2024}, nicho de nêutrons/reatores \cite{wen2022}.}
+
+\todo{Equipamento comercial: família CAEN Digital Detector Emulator (DT5800/DT5810/DT5810B/DT4800) \cite{caen_dt5810b}, tecnologia publicada em \cite{abba2014}. Posicionamento: ``commercially available but costly'', arquitetura proprietária, orientado a espectroscopia evento a evento — NÃO inventar preço.}
+
+\todo{Competidor mais recente e próximo: emulação de detector SiPM em FPGA em tempo real \cite{carsi2026} (preprint jul/2026, submetido ao IEEE TNS — atualizar citação se sair a versão de periódico).}
+
+\todo{FIO CONDUTOR (argumento central): os geradores existentes são evento a evento, de taxa baixa, com formas simples (exponencial/gaussiana) e estatística Poisson; nenhum modela a cadeia completa de leitura (shaper IIR de cauda longa) em regime de colisão a 40 MHz, com ocupância e espectro configuráveis por célula. No nosso simulador, pile-up e desvio de linha de base não são ``modos'' do gerador: emergem naturalmente da superposição dos pulsos na taxa de colisão.}
+
+% =====================================================================
 \section{Calorimeter Readout Chain Model}
 
-\todo{Cadeia genérica: material cintilador $\rightarrow$ fotomultiplicadora (PMT) $\rightarrow$ condicionamento (CSP + shaper) $\rightarrow$ ADC a 40 MHz \cite{quirino2025}.}
+\todo{Cadeia de leitura com cintilador + PMT como \emph{exemplo} (não como \emph{a} cadeia): cintilador $\rightarrow$ PMT $\rightarrow$ condicionamento (CSP + shaper) $\rightarrow$ ADC a 40 MHz \cite{quirino2025}. Citar ao menos uma alternativa de geração do sinal de prompt (ex.\ ionização de gás: câmaras de ionização, contadores proporcionais) e deixar explícito que o simulador requer apenas o pulso característico $h[n]$ do canal — no modelo convolucional, só $h[n]$ muda, a arquitetura é a mesma.}
 
 \todo{Modelo convolucional: deposições de energia como impulsos discretos $s[n]$, dinâmica do canal concentrada no pulso característico $h[n]$:}
 \begin{equation}
   r[n] = h[n] \ast s[n]
 \end{equation}
 
-\todo{Canais de leitura idênticos; ocupação (taxa de eventos) e espectro de energia variam com a posição da célula no detector. Figura: diagrama de blocos da cadeia de leitura.}
+\todo{Premissa que justifica o desenho do simulador (não deixar como frase solta — fazer a ponte causal): ``since the front-end electronics are assumed identical across the channels of a given system, a single characteristic pulse $h[n]$ describes the system; cell-to-cell differences reduce to occupancy and energy spectrum, precisely the parameters the simulator exposes as runtime-configurable''. Alternativa: mover para o início da Section IV (arquitetura) como motivação da parametrização. Figura: diagrama de blocos da cadeia de leitura.}
 
 % =====================================================================
 \section{Simulator Architecture and Implementation}

@@ -1,8 +1,7 @@
-% Citações: qualquer tipo de fonte (periódico, conferência, preprint,
-% datasheet/módulo comercial), desde que o mais recente possível e em inglês
-% (regra atualizada em 2026-07-17; a antiga "apenas periódicos" caiu).
-% Os dois primeiros são do próprio grupo. Os demais são sugestões
-% clássicas — VERIFICAR volume/páginas/DOI antes de submeter.
+% REGRA (revisão 2026-07-17): qualquer tipo de fonte (periódico,
+% conferência, preprint, datasheet/módulo comercial), o mais recente
+% possível, em inglês. Os dois primeiros são do próprio grupo.
+% VERIFICAR volume/páginas/DOI de todas as entradas antes de submeter.
 
 @article{paschoalin2026,
   author  = {Paschoalin, Thiago C. A. and Quirino, Tiago M. and Andrade Filho, Luciano M. de},
@@ -100,4 +99,117 @@
   number  = {1},
   pages   = {58--66},
   doi     = {10.1109/49.192730}
+}
+
+% ---------------------------------------------------------------------
+% Estado da arte — triagem do Luciano (metadados verificados no Crossref
+% por ele; ainda assim, conferir cada uma na fonte antes de citar).
+% ---------------------------------------------------------------------
+
+@article{arkani2013,
+  author  = {Arkani, Mohammad and Khalafi, Hossein and Vosoughi, Naser},
+  title   = {A Flexible Multichannel Digital Random Pulse Generator Based on {FPGA}},
+  journal = {World Journal of Nuclear Science and Technology},
+  year    = {2013},
+  volume  = {3},
+  number  = {4},
+  pages   = {109--116},
+  doi     = {10.4236/wjnst.2013.34019},
+  note    = {Editora de baixo prestígio (SCIRP); usar somente se agregar algo que os demais não cobrem}
+}
+
+@article{pechousek2016,
+  author  = {Pechousek, Jiri and others},
+  title   = {Software Emulator of Nuclear Pulse Generation with Different Pulse Shapes and Pile-Up},
+  journal = {Nuclear Instruments and Methods in Physics Research Section A},
+  year    = {2016},
+  volume  = {828},
+  pages   = {81--85},
+  doi     = {10.1016/j.nima.2016.05.032}
+}
+
+@article{ponikvar2018,
+  author  = {Ponikvar, Du{\v{s}}an},
+  title   = {An {FPGA}-Based Nuclear Pulse Generator with a Prescribed Amplitude Distribution},
+  journal = {Nuclear Instruments and Methods in Physics Research Section A},
+  year    = {2018},
+  volume  = {877},
+  pages   = {371--374},
+  doi     = {10.1016/j.nima.2017.09.061}
+}
+
+@article{garciaduran2019,
+  author  = {Garc{\'i}a-Dur{\'a}n, {\'A}. and others},
+  title   = {Nuclear Pulse Generator Embedded in {FPGA}},
+  journal = {Applied Radiation and Isotopes},
+  year    = {2019},
+  volume  = {147},
+  pages   = {129--135},
+  doi     = {10.1016/j.apradiso.2019.03.003}
+}
+
+@article{lisangang2021,
+  author  = {Li, Sangang and others},
+  title   = {Development and Application of a {Monte Carlo} Virtual Detector: A Novel Nuclear Pulse Signal Generator},
+  journal = {Annals of Nuclear Energy},
+  year    = {2021},
+  volume  = {163},
+  pages   = {108537},
+  doi     = {10.1016/j.anucene.2021.108537}
+}
+
+@article{wen2022,
+  author  = {Wen, X. and others},
+  title   = {Development of a Novel Simulated Neutron Pulse Signal Generator for Flux Measurement},
+  journal = {Nuclear Instruments and Methods in Physics Research Section A},
+  year    = {2022},
+  volume  = {1039},
+  pages   = {166998},
+  doi     = {10.1016/j.nima.2022.166998}
+}
+
+@article{ma2024,
+  author  = {Ma, S. and others},
+  title   = {Design and Implementation of a Virtual Nuclear Pulse Signal Generator},
+  journal = {Nuclear Instruments and Methods in Physics Research Section A},
+  year    = {2024},
+  volume  = {1058},
+  pages   = {168814},
+  doi     = {10.1016/j.nima.2023.168814}
+}
+
+% TODO: puxar autores/ano/DOI exatos direto do IEEE Xplore (registro
+% n. 5782633) antes de citar — Luciano NÃO verificou este no Crossref.
+@inproceedings{ieee_neutron_emulator,
+  author    = {TODO},
+  title     = {{FPGA}-Based Random Pulse Generator for Emulation of a Neutron Detector System in a Nuclear Reactor},
+  booktitle = {TODO (IEEE conference, Xplore record 5782633)},
+  year      = {TODO}
+}
+
+@article{abba2014,
+  author  = {Abba, A. and Caponio, F. and Geraci, A.},
+  title   = {Digital Configurable Instrument for Emulation of Signals from Radiation Detectors},
+  journal = {Review of Scientific Instruments},
+  year    = {2014},
+  volume  = {85},
+  pages   = {013506},
+  doi     = {10.1063/1.4861920}
+}
+
+% Preprint — atualizar para a versão de periódico se/quando publicada.
+@misc{carsi2026,
+  author        = {Carsi, S. and Proserpio, E. and Abba, A. and Caponio, F. and Arosio, V.},
+  title         = {Real-Time {FPGA}-Based {SiPM} Detector Emulation Using a Temporally Quantized Model},
+  year          = {2026},
+  eprint        = {2607.00841},
+  archivePrefix = {arXiv},
+  note          = {Submitted to IEEE Trans. Nucl. Sci. (Real Time 2026)}
+}
+
+@misc{caen_dt5810b,
+  author       = {{CAEN S.p.A.}},
+  title        = {{DT5810B} Digital Detector Emulator --- Datasheet},
+  howpublished = {\url{https://www.caen.it}},
+  note         = {Accessed: 2026-07-17; TODO: URL exata da página do produto}
 }
